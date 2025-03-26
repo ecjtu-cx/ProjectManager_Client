@@ -1,18 +1,21 @@
-cmake_minimum_required(VERSION 3.8)
+ï»¿cmake_minimum_required(VERSION 3.8)
 project(ProjectManager)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_AUTOUIC ON) #ui_XXX.h
-set(CMAKE_AUTOMOC ON) #ĞÅºÅÓë²ÛµÄÍ·ÎÄ¼şºÍÔ´ÎÄ¼şÉú³É moc_XXX.cpp
-set(CMAKE_AUTORCC ON) # ×ÊÔ´ÎÄ¼ş qrcÎÄ¼ş
+set(CMAKE_AUTOMOC ON) #ä¿¡å·ä¸æ§½çš„å¤´æ–‡ä»¶å’Œæºæ–‡ä»¶ç”Ÿæˆ moc_XXX.cpp
+set(CMAKE_AUTORCC ON) # èµ„æºæ–‡ä»¶ qrcæ–‡ä»¶
 
-# ÕÒµ½°ü
+# æ‰¾åˆ°åŒ…
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-# Ìí¼ÓÔ´ÎÄ¼ş
+# æ·»åŠ æºæ–‡ä»¶
 add_executable(${PROJECT_NAME} main.cpp)
 
-# Á´½Ó¿â
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+# æ·»åŠ  LoginRegister å­é¡¹ç›®
+add_subdirectory(LoginRegister)
+
+# é“¾æ¥åº“
+target_link_libraries(${PROJECT_NAME} Qt6::Widgets LoginRegister)
