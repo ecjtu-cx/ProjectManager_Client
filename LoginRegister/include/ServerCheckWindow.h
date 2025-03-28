@@ -1,4 +1,4 @@
-﻿//2025-03-26 by 程曦
+﻿// Last update: 2025-3-27 by 程曦
 #pragma once
 
 #include <QLabel>

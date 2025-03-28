@@ -12,10 +12,23 @@ set(CMAKE_AUTORCC ON) # 资源文件 qrc文件
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 # 添加源文件
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp ./ElaWidgetTools/include/ElaWidgetTools.qrc)
 
 # 添加 LoginRegister 子项目
 add_subdirectory(LoginRegister)
 
+include_directories(
+    ElaWidgetTools/include
+)
+
 # 链接库
-target_link_libraries(${PROJECT_NAME} Qt6::Widgets LoginRegister)
+target_link_libraries(${PROJECT_NAME} Qt6::Widgets LoginRegister
+ ${CMAKE_CURRENT_SOURCE_DIR}/ElaWidgetTools/lib/ElaWidgetTools.lib
+)
+
+# 添加对 ElaWidgetTools.dll 的引用
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_CURRENT_SOURCE_DIR}/ElaWidgetTools/lib/ElaWidgetTools.dll
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>
+)
